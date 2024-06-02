@@ -1,6 +1,7 @@
 #include<iostream>
 #include<string.h>
 #include "TDA.h"
+#include "recortar.h"
 #include<fstream>
 using namespace std;
 //Se crea un sst en el main y se lee el texto. sobre el sst cerado se maneja el resto. 
@@ -52,6 +53,19 @@ void MOSTRAR(super_string &s){
 }
 int main(){
 	super_string s;
+	string texto = "holaJuan";
+	for(int k = 0; k<texto.length(); k++){
+		s.agregar(texto[k]);
+	}
+	s.Print();
+	s.recortar();
+	s.Print();
+	
+	return 0;
+}
+/*
+int main(){
+	super_string s;
 	ifstream archivo;
 	string lineaActual = "FIN";
 	char caracterActual;
@@ -86,3 +100,4 @@ int main(){
 	
 	return 0;
 }
+*/

@@ -29,10 +29,10 @@ class super_string {
 		string stringizar(); 
 		void limpiar();
 		
-		//Todas las funciones extra para recortar()
-		nodo* construir_arbol_balanceado(nodo* arr[], int start, int end);
-		void InOrdenHelpBalanceo(nodo* root, nodo* arr[], int& index);
-		
+		//recotar
+		nodo* balanceo(nodo** arreglo, int inicio, int final);
+		void InOrdenRecortar(nodo*CurrNodo, nodo** arreglo, int &k);
+		 
 		//Funciones auxiliares extra:
 		void InOrdenHelp(nodo* nodo, string & texto); //Para stringizar
 		void InOrdenHelp2(nodo* nodo, string reversed); //Para reverse
