@@ -30,22 +30,24 @@ class super_string {
 			Lista(int i,char c) : indice(i), caracter(c), sig(NULL){} //constructor
 		};
 		//***********************************************************************************************************************
-		void recorrer_agregar(nodo* raiz, Lista*& lista, Lista*& lista_fin) // aca recorro y construyo la lista enlazada :O
-		{
-			if(raiz == NULL){
+		void eliminarLista(Lista*lista){
+		    while (lista != nullptr) {
+		        Lista* temp = lista;
+		        lista = lista->sig;
+		        delete temp;
+    		}
+		}
+		//***********************************************************************************************************************
+		void recorrer_agregar(nodo* raiz, Lista*& lista, Lista*& lista_fin)	{  // aca recorro y construyo la lista enlazada :O
+			if(raiz == nullptr){
 				return;
-			}
-			else
-			{
+			} else {
 				recorrer_agregar(raiz->left,lista,lista_fin); // recorro el sub arbol izq
 				Lista* nuevo = new Lista(raiz->index,raiz->c);
-				if(lista == NULL)
-				{
+				if(lista == nullptr) {
 					lista = nuevo;
 					lista_fin = lista;
-				}
-				else
-				{
+				} else {
 					lista_fin->sig = nuevo;
 					lista_fin = nuevo;
 				}
@@ -55,20 +57,18 @@ class super_string {
 		
 		//***********************************************************************************************************************
 		
-		Lista* recorrer_in_orden(nodo* raiz) // recorro el arbol y retorno la lista enlazada
-		{
-			Lista* lista = NULL;
-			Lista* lista_fin = NULL; //puntero que apunta al ultimo elemento de la lista, asi puedo agregar datos al final de la lista
+		Lista* recorrer_in_orden(nodo* raiz) { // recorro el arbol y retorno la lista enlazada
+			Lista* lista = nullptr;
+			Lista* lista_fin = nullptr; //puntero que apunta al ultimo elemento de la lista, asi puedo agregar datos al final de la lista
 			recorrer_agregar(raiz,lista,lista_fin);
 			return lista;
 		}
 		
 		//***********************************************************************************************************************
 		
-		void insertar_en_lista(Lista*& elemento,int dato, char caracter) //aca ordeno la lista para que los indices esten de menor a mayor
-		{
+		void insertar_en_lista(Lista*& elemento,int dato, char caracter) { //aca ordeno la lista para que los indices esten de menor a mayor
 			Lista* nuevo_nodo = new Lista(dato,caracter); //creo un nuevo nodo con el valor de dato y caracter
-			if(elemento == NULL || elemento->indice >= dato) // si la lista esta vacia o el dato debe ser el primer elemento 
+			if(elemento == nullptr || elemento->indice >= dato) // si la lista esta vacia o el dato debe ser el primer elemento 
 			{
 				nuevo_nodo->sig = elemento; //el nuevo nodo va a apuntar a la cabeza de la lista
 				elemento = nuevo_nodo; // el puntero de la lista ahora va a apuntar al nuevo nodo
@@ -77,21 +77,19 @@ class super_string {
 			else // si no se inserta en la cabeza de la lista, busco donde insertarlo en la lista
 			{
 				Lista* posElemento = elemento;
-				while(posElemento->sig != NULL && posElemento->sig->indice < dato) // con este while encuentro la posicion donde insetar el nuevo nodo
+				while(posElemento->sig != nullptr && posElemento->sig->indice < dato) // con este while encuentro la posicion donde insetar el nuevo nodo
 				{
 					posElemento = posElemento->sig;
 				}
-				nuevo_nodo->sig = posElemento->sig; //si tengo [1,3,5] y quiero insertar 4, nuevo = 4, posElemento -> 1 es != NULL y menor que 4, lo mismo con el 3
-				posElemento->sig = nuevo_nodo; // luego, al llegar al 5, es != NULL pero no cumple con 5<4, por lo tanto, nuevo->sig apunta a 5 y posElemento->sig(3->sig) = 4
+				nuevo_nodo->sig = posElemento->sig; //si tengo [1,3,5] y quiero insertar 4, nuevo = 4, posElemento -> 1 es != nullptr y menor que 4, lo mismo con el 3
+				posElemento->sig = nuevo_nodo; // luego, al llegar al 5, es != nullptr pero no cumple con 5<4, por lo tanto, nuevo->sig apunta a 5 y posElemento->sig(3->sig) = 4
 			}
 		}
 		
 		//***********************************************************************************************************************
-		int Longitud(Lista* elemento) //obtengo el largo de la lista
-		{
+		int Longitud(Lista* elemento){ //obtengo el largo de la lista
 			int longitud = 0;
-			while(elemento != NULL)
-			{
+			while(elemento != nullptr){
 				longitud++; //aumenta en 1 la longitud de la lista
 				elemento = elemento->sig; //para pasar al siguiente nodo 
 			}
@@ -101,9 +99,9 @@ class super_string {
 		nodo* crearArbol(Lista*& elemento,int inicio, int fin) //paso elemento por referencia | inicio y fin son las posiciones
 		{
 			//con este condicional verifico si la sublista esta vacía
-			if(inicio>fin) //si el inicio por ej es 0 y fin es -1, recorro desde a 0 hasta -1, como no se puede -> NULL
+			if(inicio>fin) //si el inicio por ej es 0 y fin es -1, recorro desde a 0 hasta -1, como no se puede -> nullptr
 			{
-				return NULL;
+				return nullptr;
 			}
 			
 			//aca busco el medio de la lista para establecer cual es la raiz
@@ -112,9 +110,9 @@ class super_string {
 			//para armar el subarbol izquierdo
 			nodo* sub_arbol_izq = crearArbol(elemento,inicio,mitad-1); //pido "la lista", desde donde se crea el sub-arbol y la mitad -1 (le resto 1 pq el medio es la raiz)
 			
-			//para verificar si el siguiente elemento es NULL
-			if(elemento == NULL){
-				return NULL;
+			//para verificar si el siguiente elemento es nullptr
+			if(elemento == nullptr){
+				return nullptr;
 			}
 			
 			nodo* raiz = new nodo(elemento->indice,elemento->caracter); //defino la raiz
@@ -140,7 +138,7 @@ class super_string {
 		int altura(nodo* arbol)
 		{
 			int Altura = 0;
-			if(arbol == NULL) 
+			if(arbol == nullptr) 
 			{
 				return 0;
 			}
@@ -148,12 +146,9 @@ class super_string {
 			{
 				int altura_subarbol_izq = altura(arbol->left); //recursivamente se va aumentando la altura cada vez que de itera sobre a parte izquierda del arbol
 				int altura_subarbol_der = altura(arbol->right); //lo mismo pero a la derecha
-				if(altura_subarbol_izq>altura_subarbol_der)
-				{
+				if(altura_subarbol_izq>altura_subarbol_der)	{
 					Altura = 1 + altura_subarbol_izq;
-				}
-				else
-				{
+				} else {
 					Altura = 1 + altura_subarbol_der;
 				}
 			}
@@ -163,21 +158,25 @@ class super_string {
 		int recortar() // Retorna this->height después de recortar
 		{
 			Lista* lista_nodos_arbol = recorrer_in_orden(root); //aca tengo la lista con el indice y el caracter de cada nodo del arbol
-			Lista* lista_ordenada = NULL; //creo una lista vacia para ir guardando los datos ordenadamente
+			Lista* lista_ordenada = nullptr; //creo una lista vacia para ir guardando los datos ordenadamente
 			
-			while(lista_nodos_arbol != NULL) //aca inserto cada elemento de la lista que tiene los nodos, ordenadamente
+			while(lista_nodos_arbol != nullptr) //aca inserto cada elemento de la lista que tiene los nodos, ordenadamente
 			{
 				insertar_en_lista(lista_ordenada,lista_nodos_arbol->indice,lista_nodos_arbol->caracter);
+				Lista* temp = lista_nodos_arbol;
 				lista_nodos_arbol = lista_nodos_arbol->sig;
+				delete temp;
 			} //una vez terminado el while, tengo la lista ordenada 
 			
-			//ACA DEBERIA DE ELLIMNARSE LA LISTA "LISTA_NODOS_ARBOL", DESPUES NO SE USA
-			
+			//Crear AVL
 			nodo* arbol = construirArbol(lista_ordenada);
-			
-			//DESPUES DE CONSTUIR EL ARBOL YA NO NECESITO LA LISTA ORDENADA, ASI QUE SE ELIMINA
-			
-			height = altura(arbol);
+			//Borrar y 'actualizar' arbol original
+			limpiar();
+			root = nuevo_arbol;
+			height = altura(root);
+    		length = Longitud(lista_ordenada);
+    		
+    		eiminarLista(lista_ordenada);
 			return height;
 		}
 		//***********************************************************************************************************************
