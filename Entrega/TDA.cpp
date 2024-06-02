@@ -7,6 +7,7 @@ using namespace std;
 
 
 void REVERSO(int l, int r, super_string & s){
+	cout<<"Check reverso\n";
 	super_string s1, s2, s3, s4;
 	s.separar(l, s1, s2);
 	s2.separar(r-l+1, s3, s4);
@@ -22,6 +23,7 @@ void REVERSO(int l, int r, super_string & s){
 }
 
 void ELIMINAR(int l, int r, super_string & s){
+	cout<<"Check Eliminar\n";
 	super_string s1, s2, s3, s4;
 	s.separar(l, s1, s2);
 	s2.separar(r-l+1, s3, s4);
@@ -34,6 +36,7 @@ void ELIMINAR(int l, int r, super_string & s){
 	s4.limpiar();
 }
  void INSERTAR(int i, super_string & s, string S){
+ 	cout<<"Check insertar\n";
 	super_string nuevo,s1, s2;
 	for (int k =0; k<S.length(); k++){
 		nuevo.agregar(S[k]);
@@ -48,11 +51,13 @@ void ELIMINAR(int l, int r, super_string & s){
 	s2.limpiar();
  }
 void MOSTRAR(super_string &s){
+	cout<<"Check Mostrar\n";
 	string actual = s.stringizar();
 	cout<<actual<<"\n";
 }
 
 void RECORTAR(super_string &s){
+	cout<<"Check recortar\n";
 	int i = s.recortar();
 	cout<<i<<"\n";
 }
@@ -65,24 +70,29 @@ int main(){
 	archivo>>lineaActual;
 	while(lineaActual!="FIN"){
 		if (lineaActual == "REVERSO") {
+			cout<<"Inverso: ";
 			int l, r;
 			archivo>>l;
 			archivo>>r;
 			REVERSO(l, r, s);
         } else if (lineaActual == "ELIMINAR") {
+        	cout<<"Eliminar: ";
             int l, r;
 			archivo>>l;
 			archivo>>r;
 			ELIMINAR(l, r, s);
         } else if (lineaActual == "INSERTAR") {
+        	cout<<"Insertar: ";
             int i;
             archivo>>i;
             string S;
             archivo>>S;
             INSERTAR(i, s, S);
         } else if (lineaActual == "RECORTAR") {
+        	cout<<"Recortar: ";
             RECORTAR(s);
         } else if (lineaActual == "MOSTRAR") {
+        	cout<<"Mostrar: ";
             MOSTRAR(s);
         };
 		archivo>>lineaActual;
