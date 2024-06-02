@@ -20,13 +20,35 @@ void super_string::InOrdenRecortar(nodo*CurrNodo, nodo**arreglo, int &k){
 	InOrdenRecortar(CurrNodo->right, arreglo, k);
 }
 
+int super_string::altura(nodo*nodo){
+	int Altura = 0;
+	if(nodo == NULL) 
+	{
+		return 0;
+	}
+	else
+	{
+		int altura_subarbol_izq = altura(nodo->left); //recursivamente se va aumentando la altura cada vez que de itera sobre a parte izquierda del arbol
+		int altura_subarbol_der = altura(nodo->right); //lo mismo pero a la derecha
+		if(altura_subarbol_izq>altura_subarbol_der)
+		{
+			Altura = 1 + altura_subarbol_izq;
+		}
+		else
+		{
+			Altura = 1 + altura_subarbol_der;
+		}
+	}
+	return Altura;
+}
 int super_string::recortar(){
 	nodo** arreglo = new nodo*[length];
 	int k = 0;
 	InOrdenRecortar(root, arreglo, k);
 	PostOrdenHelp(root);// limpiar el arbol antiguo
 	root = balanceo(arreglo, 0 , length-1);
-	return 0;
+	height = altura(root);
+	return height;
 }
 
 #endif

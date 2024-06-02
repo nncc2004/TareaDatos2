@@ -32,7 +32,8 @@ class super_string {
 		//recotar
 		nodo* balanceo(nodo** arreglo, int inicio, int final);
 		void InOrdenRecortar(nodo*CurrNodo, nodo** arreglo, int &k);
-		 
+		int altura(nodo* nodo);
+		int alturaCaller();
 		//Funciones auxiliares extra:
 		void InOrdenHelp(nodo* nodo, string & texto); //Para stringizar
 		void InOrdenHelp2(nodo* nodo, string reversed); //Para reverse

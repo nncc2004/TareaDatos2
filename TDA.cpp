@@ -4,6 +4,11 @@
 #include "recortar.h"
 #include<fstream>
 using namespace std;
+
+int super_string::alturaCaller(){
+	return altura(root);
+}
+
 //Se crea un sst en el main y se lee el texto. sobre el sst cerado se maneja el resto. 
 
 void REVERSO(int l, int r, super_string & s){
@@ -57,9 +62,8 @@ int main(){
 	for(int k = 0; k<texto.length(); k++){
 		s.agregar(texto[k]);
 	}
-	s.Print();
-	s.recortar();
-	s.Print();
+	cout<<s.alturaCaller();
+	cout<<s.recortar();
 	
 	return 0;
 }
