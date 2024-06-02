@@ -5,11 +5,6 @@
 #include<fstream>
 using namespace std;
 
-int super_string::alturaCaller(){
-	return altura(root);
-}
-
-//Se crea un sst en el main y se lee el texto. sobre el sst cerado se maneja el resto. 
 
 void REVERSO(int l, int r, super_string & s){
 	super_string s1, s2, s3, s4;
@@ -56,18 +51,11 @@ void MOSTRAR(super_string &s){
 	string actual = s.stringizar();
 	cout<<actual<<"\n";
 }
-int main(){
-	super_string s;
-	string texto = "holaJuan";
-	for(int k = 0; k<texto.length(); k++){
-		s.agregar(texto[k]);
-	}
-	cout<<s.alturaCaller();
-	cout<<s.recortar();
-	
-	return 0;
+
+void RECORTAR(super_string &s){
+	int i = s.recortar();
+	cout<<i<<"\n";
 }
-/*
 int main(){
 	super_string s;
 	ifstream archivo;
@@ -93,8 +81,7 @@ int main(){
             archivo>>S;
             INSERTAR(i, s, S);
         } else if (lineaActual == "RECORTAR") {
-            // Código para la acción RECORTAR
-            cout<<"Funcion en progreso...";
+            RECORTAR(s);
         } else if (lineaActual == "MOSTRAR") {
             MOSTRAR(s);
         };
@@ -104,4 +91,3 @@ int main(){
 	
 	return 0;
 }
-*/

@@ -33,31 +33,16 @@ class super_string {
 		nodo* balanceo(nodo** arreglo, int inicio, int final);
 		void InOrdenRecortar(nodo*CurrNodo, nodo** arreglo, int &k);
 		int altura(nodo* nodo);
-		int alturaCaller();
+
 		//Funciones auxiliares extra:
 		void InOrdenHelp(nodo* nodo, string & texto); //Para stringizar
 		void InOrdenHelp2(nodo* nodo, string reversed); //Para reverse
 		void InOrdenHelp3(nodo* nodo, int i, super_string &a, super_string &b); //Para separar
 		void PostOrdenHelp(nodo* nodo);//Para limpiar
-		//Borrar estas luego
-		void Print();
-		void InOrdenPrint(nodo* nodo);
+
+
 		
 };
-//Borrar estas luego
-
-void super_string::Print(){
-	InOrdenPrint(root);
-	cout<<"\n";
-}
-
-void super_string::InOrdenPrint(nodo*nodo){
-	if(nodo == nullptr) return;
-	InOrdenPrint(nodo->left);
-	cout<<nodo->c<<" ";
-	InOrdenPrint(nodo->right);
-}
-
 //Agregar (terminada)
 void super_string::agregar(char c){
 	//Crear el nodo
