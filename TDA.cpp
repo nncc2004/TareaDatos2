@@ -87,7 +87,7 @@ int main(){
         };
 		archivo>>lineaActual;
 	}
-	
+	cout<<"Fin ejecucion";
 	
 	return 0;
 }
